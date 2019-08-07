@@ -27,7 +27,12 @@
   Then invoke the callback function, passing in the first element in the array as it's argument.
 */
 
-// Code Here 
+// Code Here
+// function expression bc first is not defined as a function
+var first = function (arr, cb) {
+  cb(arr[0]);
+}
+
 
 // Do not edit the code below.
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
@@ -48,6 +53,11 @@ first(names, function(firstName){
 */
 
 //Code Here
+var last = function(arr, cb) {
+  // access the last element of the array and storing it in a new variable called lastElement 
+  let lastElement = arr[arr.length - 1];
+  cb(lastElement);
+}
 
 // Do not edit the code below.
 last(names, function(lastName){
@@ -66,6 +76,10 @@ last(names, function(lastName){
 */
 
 //Code Here
+var multiply = function(num1, num2, cb) {
+  let product = num1 * num2;
+  cb(product);
+}
 
 // Do not edit the code below.
 multiply(4, 3, function(answer){
@@ -85,6 +99,13 @@ multiply(4, 3, function(answer){
 */
 
 //Code Here 
+var contains = function(arr, name, cb) {
+  if (arr.includes(name)) {
+    cb(true);
+  } else {
+    cb(false);
+  }
+}
 
 // Do not edit the code below.
 contains(names, 'Colt', function(result){
@@ -104,8 +125,32 @@ contains(names, 'Colt', function(result){
   Write a function called uniq that takes in an array and a callback function.
   Remove any duplicate values from the array, and invoke the callback with the modified array as an argument.
 */
+// find duplicates in array (function)
+// function findDuplicates(arr) {
+//   let duplicateNums = [];
+//   arr.forEach(function(element, index) {
+//     //Find if there is a duplicate or not
+//     if (arr.indexOf(element, index + 1) > -1) {
+//       //Find if the element is already in the result array
+//       if (duplicateNums.indexOf(element) === -1) {
+//           duplicateNums.push(element);
+//         }
+//       }
+//     });
+//     return duplicateNums;
+//   }
+//   //remove duplicates from array
+//   delete duplicateNums; 
+//   //invoke the callback function with the new modified array
+//   return cb;
 
 //Code Here
+function uniq(arr, cb) {
+  var unique = arr.filter(function(item, pos) {
+  return arr.indexOf(item) == pos;
+  });
+  cb(unique);
+}
 
 // Do not edit the code below.
 uniq(names, function(uniqArr){
@@ -123,6 +168,11 @@ uniq(names, function(uniqArr){
 */
 
 //Code Here 
+function each(arr, cb) {
+  var result = arr.forEach(function(element, index) 
+  { cb(element, index); }
+  ); 
+}
 
 // Do not edit the code below.
 each(names, function(item, indice){
@@ -135,11 +185,29 @@ each(names, function(item, indice){
 ////////// PROBLEM 7 //////////
 
 /*
-  Write a function called getUserById that takes in three parameters: an array of objects (users), an id and a callback, and searches for the user with a matching id.
+  Write a function called getUserById that takes in three parameters: an array of objects (users), an id and a callback, 
+  and searches for the user with a matching id.
   When the correct user object is found, invoke the callback with the user object as an argument.
 */
 
+// function search(id, arr) {
+  //   for (var i = 0; i < arr.length - 1; i++) {
+  //     if (arr[i].id = id) {
+  //       return cb(arr[i]);
+  //     }
+  // }
+
 // Code here
+function getUserById (users, id, cb) {
+  // search for the user with matching id
+  for (var i = 0; i < users.length; i++) {
+    // if the user has a matching id then invoke callback with the user object
+    if (users[i].id === id) {
+      return cb(users[i]);
+    } 
+  }
+}
+
 
 // Do not edit the code below.
 var users = [
